@@ -1,0 +1,49 @@
+<resources>
+    <string name="app_name">iThought</string>
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, audire nusquam inimicus eum ad. Sea erroribus evertitur deterruisset no. Case liber omittantur sea ex. Vis ut graecis suscipiantur, pri vidit ceteros reprehendunt cu. Everti impetus numquam et his, ea nobis omittantur nam.
+
+Te tation dicant vix, utinam aliquam evertitur te has. Quod vivendum ut ius, ex vitae aliquid deleniti sed. Ut nibh adipisci delicatissimi vel, ex errem dicunt intellegam duo, primis detracto in vix. Nec no amet doctus, ex nec blandit ponderum. Admodum scaevola tacimates in vel, in magna utamur explicari his. Diam brute lorem sed an, laoreet delectus usu ne, eu ius verterem cotidieque. Qui omnis dictas in, nam viris feugait ex.
+
+Quot falli noster ad per, ea sea mutat partiendo, mei an quaeque praesent intellegam. Mea hinc sonet cu, ea mollis virtute percipit sed. Et mei appareat scribentur, vix at sonet dolores, in quo tempor utroque adversarium. Sed ex placerat expetendis honestatis, pro aperiri expetenda no.
+
+Audiam voluptaria assueverit pro id, vel te sumo consequat, duo ancillae dissentiunt disputationi ea. Vero option saperet ei vix, congue ornatus accusamus ad nec, ne est ipsum affert legendos. Commodo euismod fabulas in eam, wisi molestiae quo an. Vix ut quod deleniti, usu cibo verterem te.
+
+At his dicit scribentur, sit utroque volutpat ei. His an malis epicuri fastidii, enim quas quidam te vis. Placerat molestiae ut cum, error euismod at eos. Paulo fierent senserit sea ex. Per ut persius epicuri.</string>
+
+
+    <string-array name="drawer_list">
+        <item>Add a Post</item>
+        <item>Your Posts</item>
+        <item>Liked Posts</item>
+        <item>Sign Out</item>
+    </string-array>
+
+    <string-array name="category_list">
+        <item>Select a Category</item>
+        <item>Social</item>
+        <item>Nature</item>
+        <item>Fashion</item>
+        <item>Thoughts</item>
+        <item>Food</item>
+        <item>Life Style</item>
+        <item>Experience</item>
+    </string-array>
+
+    <string name="next">NEXT</string>
+    <string name="skip">SKIP</string>
+    <string name="start">GOT IT</string>
+
+    <string name="slide_1_title">Read exciting thoughts, poems, stories and so much more from other people.</string>
+    <string name="slide_1_desc">Explore your reading by selecting from many available categories.</string>
+    <string name="slide_1_desc2">Get in touch with lot of exciting people.</string>
+
+    <string name="slide_2_title">Post your heart out!</string>
+    <string name="slide_2_title2">You can also post</string>
+    <string name="slide_2_title3">ANONYMOUSLY</string>
+    <string name="slide_2_desc">I will not recommend you to do so...but you know, YOU CAN ;)</string>
+
+    <string name="slide_3_title">Promote your blog,\n website,\nInstagram pages etc.</string>
+    <string name="slide_3_desc2">-your posts\n-your liked posts\n-your personal details\n-your promotional details</string>
+    <string name="slide_3_desc">Mange your account</string>
+
+</resources>

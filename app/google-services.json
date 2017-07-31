@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1075907344015",
+    "firebase_url": "https://ithought-57132.firebaseio.com",
+    "project_id": "ithought-57132",
+    "storage_bucket": "ithought-57132.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1075907344015:android:b8468fc63f371ed0",
+        "android_client_info": {
+          "package_name": "com.ithought.rahul.ithought"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1075907344015-po29t31q34ipsg7krj56r93t7t53e3ro.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ithought.rahul.ithought",
+            "certificate_hash": "b0439295a5a05c1fe7693f28b52f2fa3aeb8f516"
+          }
+        },
+        {
+          "client_id": "1075907344015-9k0cd80bo8dmv8bqhg99jqp7k8q8t7j8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAcJuc51FBS9Md7VuDIC2LbJTKmTlGWZDM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1075907344015-9k0cd80bo8dmv8bqhg99jqp7k8q8t7j8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

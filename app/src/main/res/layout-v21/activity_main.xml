@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--<android.support.v7.widget.RecyclerView android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:id="@+id/post_lists"-->
+    <!--xmlns:android="http://schemas.android.com/apk/res/android">-->
+<!--</android.support.v7.widget.RecyclerView>-->
+<RelativeLayout android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+
+
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/drawer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/my_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:background="?attr/colorPrimary"
+                android:elevation="4dp"
+                android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
+            <android.support.v7.widget.RecyclerView android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/posts_list"
+                xmlns:android="http://schemas.android.com/apk/res/android">
+            </android.support.v7.widget.RecyclerView>
+
+        </LinearLayout>
+
+
+
+
+        <fragment
+            android:id="@+id/fragment_navigation_drawer"
+            android:name="com.ithought.rahul.ithought.FragmentNavigationDrawer"
+            android:layout_width="240dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            app:layout="@layout/fragment_navigation_drawer"
+            tools:layout="@layout/fragment_navigation_drawer" />
+
+
+    </android.support.v4.widget.DrawerLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:src="@drawable/add2"
+        android:elevation="5dp"
+        android:background="#000000"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="15dp"/>
+
+
+</RelativeLayout>
+
+
+

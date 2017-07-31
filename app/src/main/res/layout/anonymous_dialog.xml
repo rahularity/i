@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="#000000"
+    android:layout_margin=".1dp"
+    android:layout_height="wrap_content">
+
+    <ImageButton
+        android:id="@+id/close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_margin="5dp"
+        android:padding="15dp"
+        android:background="@drawable/close"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="25dp"
+        android:layout_below="@+id/close">
+
+        <ImageView
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/anonymousman"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:textSize="21dp"
+            android:textColor="@color/grayShade1"
+            android:text="Someone posted this Anonymously"
+            android:textStyle="bold|italic"/>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

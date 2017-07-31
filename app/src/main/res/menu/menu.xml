@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/myAccount"
+        android:title="My Account">
+    </item>
+
+    <item
+        android:title="random"
+        android:id="@+id/random"
+        android:icon="@drawable/shuffle"
+        app:showAsAction="always">
+
+    </item>
+
+    <item
+        android:id="@+id/myPosts"
+        android:title="My Posts">
+    </item>
+
+    <item
+        android:id="@+id/likedPosts"
+        android:title="Liked Posts"
+        android:icon="@drawable/heart_filled">
+    </item>
+
+    <item
+        android:id="@+id/about"
+        android:title="About">
+
+    </item>
+
+    <item
+        android:title="Sign Out"
+        android:id="@+id/sign_out">
+
+    </item>
+
+</menu>

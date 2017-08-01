@@ -186,6 +186,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
                     usr.child("website").setValue("");
                     usr.child("about").setValue("");
+                    usr.child("instagram").setValue("");
                 }
             }
 

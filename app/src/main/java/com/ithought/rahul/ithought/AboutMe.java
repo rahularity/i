@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,7 +33,8 @@ public class AboutMe extends AppCompatActivity {
     private static final int PICK_PHOTO = 0;
     private Uri imageUri = null,resultUri=null;
     String ImageUrl = null;
-    private TextView userName,userEmail,aboutYourself,website;
+    private TextView userName,userEmail;
+    private EditText aboutYourself,website,instagram;
     private Button done;
     private ImageView profilePic;
     private FirebaseAuth mAuth;
@@ -40,6 +42,7 @@ public class AboutMe extends AppCompatActivity {
     private StorageReference mStorage,userStorage;
     private FirebaseStorage mFirebaseStorage;
     private ProgressDialog pd;
+    String Uid;
 
 
 
@@ -48,16 +51,17 @@ public class AboutMe extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_me);
 
+        mAuth = FirebaseAuth.getInstance();
+        Uid = mAuth.getCurrentUser().getUid();
         userName = (TextView)findViewById(R.id.user_name);
         userEmail = (TextView)findViewById(R.id.user_email);
-        aboutYourself = (TextView)findViewById(R.id.about_yourself);
-        website = (TextView)findViewById(R.id.website);
+        aboutYourself = (EditText) findViewById(R.id.about_yourself);
+        website = (EditText) findViewById(R.id.website);
+        instagram = (EditText) findViewById(R.id.instagram);
         profilePic = (ImageView)findViewById(R.id.profile_pic);
         done = (Button)findViewById(R.id.done);
 
         pd = new ProgressDialog(this);
-        mAuth = FirebaseAuth.getInstance();
-        String Uid = mAuth.getCurrentUser().getUid();
 
 
 
@@ -73,6 +77,7 @@ public class AboutMe extends AppCompatActivity {
                 ImageUrl = dataSnapshot.child("profilePic").getValue(String.class);
                 website.setText(dataSnapshot.child("website").getValue(String.class));
                 aboutYourself.setText(dataSnapshot.child("about").getValue(String.class));
+                instagram.setText(dataSnapshot.child("instagram").getValue(String.class));
 
                 if(ImageUrl.length()==0){}else{
                     Picasso.with(AboutMe.this).load(ImageUrl).fit().centerCrop().into(profilePic);
@@ -115,6 +120,7 @@ public class AboutMe extends AppCompatActivity {
             userDatabase.child("userName").setValue(userName.getText().toString().trim());
             userDatabase.child("userEmail").setValue(userEmail.getText().toString().trim());
             userDatabase.child("about").setValue(about);
+            userDatabase.child("instagram").setValue(instagram.getText().toString().trim());
             userDatabase.child("website").setValue(web);
             pd.dismiss();
             finish();
@@ -147,6 +153,7 @@ public class AboutMe extends AppCompatActivity {
                         userDatabase.child("userEmail").setValue(userEmail.getText().toString().trim());
                         userDatabase.child("about").setValue(about);
                         userDatabase.child("website").setValue(web);
+                        userDatabase.child("instagram").setValue(instagram.getText().toString().trim());
                         userDatabase.child("profilePic").setValue(imageUrl.toString());
                         pd.dismiss();
                         finish();
@@ -162,6 +169,7 @@ public class AboutMe extends AppCompatActivity {
                         userDatabase.child("userEmail").setValue(userEmail.getText().toString().trim());
                         userDatabase.child("about").setValue(about);
                         userDatabase.child("website").setValue(web);
+                        userDatabase.child("instagram").setValue(instagram.getText().toString().trim());
                         userDatabase.child("profilePic").setValue(imageUrl.toString());
                         pd.dismiss();
                         finish();

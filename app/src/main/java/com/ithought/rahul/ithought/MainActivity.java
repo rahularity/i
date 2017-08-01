@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.os.Parcelable;
 import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -53,8 +54,8 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener mAuthListener;
     public Query postsNode,likedPosts;
     ProgressDialog dialog;
-    int currentVisiblePosition = 0;
     private LinearLayoutManager mLayoutManager;
+    private static final String BUNDLE_RECYCLER_LAYOUT = "classname.recycler.layout";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -160,6 +161,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        setTheScreen();
+
     }
 
     @Override
@@ -244,7 +247,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         mAuth.addAuthStateListener(mAuthListener);
-        Toast.makeText(MainActivity.this,"onStart",Toast.LENGTH_SHORT).show();
     }
 
 
@@ -433,34 +435,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
-
-        currentVisiblePosition = ((LinearLayoutManager)mPostsList.getLayoutManager()).findFirstCompletelyVisibleItemPosition();
-        Toast.makeText(MainActivity.this,String.valueOf(currentVisiblePosition),Toast.LENGTH_SHORT).show();
-
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        setTheScreen();
-        mPostsList.getLayoutManager().scrollToPosition(currentVisiblePosition);
-        Toast.makeText(MainActivity.this,"onResume",Toast.LENGTH_SHORT).show();
-        currentVisiblePosition = 0;
-
-
-    }
-
-    @Override
     public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
         super.onSaveInstanceState(outState, outPersistentState);
-
-        currentVisiblePosition = ((LinearLayoutManager)mPostsList.getLayoutManager()).findFirstCompletelyVisibleItemPosition();
-        Toast.makeText(MainActivity.this,String.valueOf(currentVisiblePosition),Toast.LENGTH_SHORT).show();
-
+        outState.putParcelable(BUNDLE_RECYCLER_LAYOUT, mPostsList.getLayoutManager().onSaveInstanceState());
     }
 
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
 
+        if(savedInstanceState != null)
+        {
+            Parcelable savedRecyclerLayoutState = savedInstanceState.getParcelable(BUNDLE_RECYCLER_LAYOUT);
+            mPostsList.getLayoutManager().onRestoreInstanceState(savedRecyclerLayoutState);
+        }
+    }
 }

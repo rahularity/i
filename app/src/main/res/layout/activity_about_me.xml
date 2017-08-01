@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="#000000"
-    android:paddingTop="25dp"
+    android:paddingTop="10dp"
     android:paddingBottom="5dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -27,15 +27,15 @@
         android:layout_below="@+id/add_Bio"
         android:layout_above="@+id/done_button_layout"
         android:layout_width="match_parent"
-        android:paddingStart="35dp"
-        android:paddingEnd="35dp"
+        android:paddingStart="25dp"
+        android:paddingEnd="25dp"
         android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="vertical"
-            android:layout_marginEnd="15dp"
-            android:layout_marginStart="15dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
             android:layout_height="wrap_content">
 
             <LinearLayout
@@ -84,10 +84,61 @@
                 android:textStyle="bold"
                 android:text="Email"
                 android:textAlignment="center"
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="10dp"
                 android:layout_marginTop="5dp"
                 android:background="@drawable/textview_background"
                 android:padding="10dp"/>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <ImageButton
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/instagram"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:orientation="vertical">
+
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="http://instagram.com/"
+                        android:textSize="14sp"
+                        android:layout_gravity="center_vertical"
+                        android:textStyle="bold"
+                        android:fontFamily="sans-serif-condensed"
+                        android:textColor="#ffffff"
+                        android:layout_weight="1"/>
+
+                    <EditText
+                        android:id="@+id/instagram"
+                        android:layout_width="match_parent"
+                        android:layout_height="28dp"
+                        android:textStyle="italic"
+                        android:textAlignment="center"
+                        android:hint="your instagram page name"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginTop="5dp"
+                        android:fontFamily="sans-serif-condensed-light"
+                        android:background="@drawable/textview_background"
+                        android:padding="5dp"/>
+
+                </LinearLayout>
+
+
+
+
+            </LinearLayout>
+
 
             <EditText
                 android:id="@+id/about_yourself"
@@ -95,6 +146,8 @@
                 android:layout_height="100dp"
                 android:hint="Tell readers a bit about yourself"
                 android:textAlignment="center"
+                android:fontFamily="sans-serif-condensed"
+                android:textStyle="bold"
                 android:layout_marginBottom="5dp"
                 android:layout_marginTop="5dp"
                 android:background="@drawable/textview_background"
@@ -103,10 +156,12 @@
             <EditText
                 android:id="@+id/website"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
                 android:hint="Blog/Website (if any)"
                 android:textAlignment="center"
                 android:layout_marginBottom="5dp"
+                android:fontFamily="sans-serif-condensed"
+                android:textStyle="bold"
                 android:layout_marginTop="5dp"
                 android:background="@drawable/textview_background"
                 android:padding="8dp"/>

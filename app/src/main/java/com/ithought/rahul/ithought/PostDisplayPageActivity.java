@@ -2,9 +2,15 @@ package com.ithought.rahul.ithought;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -29,6 +35,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
+import java.util.List;
 import java.util.Random;
 
 public class PostDisplayPageActivity extends AppCompatActivity {
@@ -46,6 +53,7 @@ public class PostDisplayPageActivity extends AppCompatActivity {
     private boolean mLoved = false;
     private ImageButton authorDetails;
     private Dialog dialog,dialogAnonymous,dialogDelete;
+    private Context ctx;
 
 
     @Override
@@ -228,15 +236,18 @@ public class PostDisplayPageActivity extends AppCompatActivity {
     private void showPostAuthorDetail() {
 
         if(isAnonymous.equals("false")){
-            final TextView website,about,name,email;
+            final TextView website,about,name,email,instagram;
             name = (TextView)dialog.findViewById(R.id.name);
             email = (TextView)dialog.findViewById(R.id.email);
             about = (TextView)dialog.findViewById(R.id.about);
             website = (TextView)dialog.findViewById(R.id.website);
+            instagram = (TextView)dialog.findViewById(R.id.instagram);
+            instagram.setMovementMethod(LinkMovementMethod.getInstance());
 
-            final LinearLayout aboutSection,websiteSection;
+            final LinearLayout aboutSection,websiteSection,instaPage;
             aboutSection = (LinearLayout)dialog.findViewById(R.id.about_section);
             websiteSection = (LinearLayout)dialog.findViewById(R.id.website_section);
+            instaPage = (LinearLayout)dialog.findViewById(R.id.insta_page);
 
             final ImageView profilePic = (ImageView)dialog.findViewById(R.id.profile_pic);
 
@@ -246,17 +257,25 @@ public class PostDisplayPageActivity extends AppCompatActivity {
             theAuthor.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
+
+                    String instaUserName = dataSnapshot.child("instagram").getValue(String.class);
                     name.setText(dataSnapshot.child("userName").getValue(String.class));
                     email.setText(dataSnapshot.child("userEmail").getValue(String.class));
                     about.setText(dataSnapshot.child("about").getValue(String.class));
                     website.setText(dataSnapshot.child("website").getValue(String.class));
+                    instagram.setText(instaUserName);
                     profPic = dataSnapshot.child("profilePic").getValue(String.class);
 
-                        if (about.length()!=0){
-                            aboutSection.setVisibility(View.VISIBLE);
+                        if (about.length()==0){
+                            aboutSection.setVisibility(View.GONE);
                         }
-                        if (website.length()!=0){
-                            websiteSection.setVisibility(View.VISIBLE);
+                        if (website.length()==0){
+                            websiteSection.setVisibility(View.GONE);
+                        }
+                        if(instagram.length()==0){
+                            instaPage.setVisibility(View.GONE);
+                         }else{
+                            instagram.setText("http://instagram.com/"+instaUserName);
                         }
                         if (profPic.length()!=0){
                             Picasso.with(PostDisplayPageActivity.this).load(profPic).into(profilePic);
@@ -264,6 +283,25 @@ public class PostDisplayPageActivity extends AppCompatActivity {
                     }
                 @Override
                 public void onCancelled(DatabaseError databaseError) {}
+            });
+
+            instagram.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String insta_link = "http://instagram.com/";
+                    String insta_userName = instagram.getText().toString().trim();
+                    String insta_page = insta_link + insta_userName;
+                    Uri uri = Uri.parse("http://instagram.com/_u/" + insta_userName);
+                    Intent insta = new Intent(Intent.ACTION_VIEW, uri);
+                    insta.setPackage("com.instagram.android");
+
+                    if (isIntentAvailable(insta)){
+                        startActivity(insta);
+                    } else{
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(insta_page)));
+                    }
+
+                }
             });
             dialog.show();
 
@@ -286,6 +324,12 @@ public class PostDisplayPageActivity extends AppCompatActivity {
         }
 
 
+    }
+
+    private boolean isIntentAvailable(Intent insta) {
+        final PackageManager packageManager = getApplicationContext().getPackageManager();
+        List<ResolveInfo> list = packageManager.queryIntentActivities(insta, PackageManager.MATCH_DEFAULT_ONLY);
+        return list.size() > 0;
     }
 
     private void editPost() {

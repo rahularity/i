@@ -152,7 +152,7 @@ public class AddPost extends AppCompatActivity {
                     }else{
                         mProgress_save_to_database.setMessage("saving data...");
                         mProgress_save_to_database.show();
-                        mProgress_save_to_database.setCancelable(false);
+                        mProgress_save_to_database.setCancelable(true);
                         saveNormally();
                     }
                 }else{
@@ -170,7 +170,7 @@ public class AddPost extends AppCompatActivity {
                     }else{
                         mProgress_save_to_database.setMessage("saving data...");
                         mProgress_save_to_database.show();
-                        mProgress_save_to_database.setCancelable(false);
+                        mProgress_save_to_database.setCancelable(true);
                         saveNormally();
                     }
                 }
@@ -197,7 +197,7 @@ public class AddPost extends AppCompatActivity {
                     }else{
                         mProgress_save_to_database.setMessage("saving data...");
                         mProgress_save_to_database.show();
-                        mProgress_save_to_database.setCancelable(false);
+                        mProgress_save_to_database.setCancelable(true);
                         saveAnonymously();
                     }
                 }else{
@@ -215,7 +215,7 @@ public class AddPost extends AppCompatActivity {
                     }else{
                         mProgress_save_to_database.setMessage("saving data...");
                         mProgress_save_to_database.show();
-                        mProgress_save_to_database.setCancelable(false);
+                        mProgress_save_to_database.setCancelable(true);
                         saveAnonymously();
                     }
                 }
@@ -229,14 +229,7 @@ public class AddPost extends AppCompatActivity {
     private void saveAnonymously() {
 
         if(key!=null){
-            oldPost.child("title").setValue(titleString);
-            oldPost.child("content").setValue(contentString);
-            oldPost.child("uid").setValue(Uid);
-            oldPost.child("name").setValue(Name);
-            oldPost.child("email").setValue(Email);
-            oldPost.child("anonymous").setValue("true");
-            oldPost.child("category").setValue(category_from_spinner);
-            oldPost.child("time").setValue(ServerValue.TIMESTAMP);
+
             if(resultUri!=null){
 
                 mPicReference = mFirebaseStorage.getReferenceFromUrl(image);
@@ -249,35 +242,53 @@ public class AddPost extends AppCompatActivity {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
-                        Toast.makeText(AddPost.this,"upload done",Toast.LENGTH_LONG).show();
+                        oldPost.child("title").setValue(titleString);
+                        oldPost.child("content").setValue(contentString);
+                        oldPost.child("uid").setValue(Uid);
+                        oldPost.child("name").setValue(Name);
+                        oldPost.child("email").setValue(Email);
+                        oldPost.child("anonymous").setValue("true");
+                        oldPost.child("category").setValue(category_from_spinner);
+                        oldPost.child("time").setValue(ServerValue.TIMESTAMP);
                         imageUrl = taskSnapshot.getDownloadUrl();
                         oldPost.child("ImageUrl").setValue(imageUrl.toString());
                         mProgress_save_to_database.dismiss();
-
+                        Toast.makeText(AddPost.this,"upload done",Toast.LENGTH_LONG).show();
                         finish();
                     }
                 });
             }else{
+                oldPost.child("title").setValue(titleString);
+                oldPost.child("content").setValue(contentString);
+                oldPost.child("uid").setValue(Uid);
+                oldPost.child("name").setValue(Name);
+                oldPost.child("email").setValue(Email);
+                oldPost.child("anonymous").setValue("true");
+                oldPost.child("category").setValue(category_from_spinner);
+                oldPost.child("time").setValue(ServerValue.TIMESTAMP);
                 oldPost.child("ImageUrl").setValue(image);
+                mProgress_save_to_database.dismiss();
+                Toast.makeText(AddPost.this,"post updated",Toast.LENGTH_LONG).show();
                 finish();
             }
         }else{
-            newPost.child("title").setValue(titleString);
-            newPost.child("content").setValue(contentString);
-            newPost.child("uid").setValue(Uid);
-            newPost.child("name").setValue(Name);
-            newPost.child("email").setValue(Email);
-            newPost.child("anonymous").setValue("true");
-            newPost.child("category").setValue(category_from_spinner);
-            newPost.child("time").setValue(ServerValue.TIMESTAMP);
+
             mStorage.putFile(resultUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
-                    Toast.makeText(AddPost.this,"upload done",Toast.LENGTH_LONG).show();
+                    newPost.child("title").setValue(titleString);
+                    newPost.child("content").setValue(contentString);
+                    newPost.child("uid").setValue(Uid);
+                    newPost.child("name").setValue(Name);
+                    newPost.child("email").setValue(Email);
+                    newPost.child("anonymous").setValue("true");
+                    newPost.child("category").setValue(category_from_spinner);
+                    newPost.child("time").setValue(ServerValue.TIMESTAMP);
                     imageUrl = taskSnapshot.getDownloadUrl();
                     newPost.child("ImageUrl").setValue(imageUrl.toString());
                     mProgress_save_to_database.dismiss();
+                    Toast.makeText(AddPost.this,"post updated",Toast.LENGTH_LONG).show();
 
                     finish();
                 }
@@ -289,14 +300,7 @@ public class AddPost extends AppCompatActivity {
     private void saveNormally() {
 
         if(key!=null){
-            oldPost.child("title").setValue(titleString);
-            oldPost.child("content").setValue(contentString);
-            oldPost.child("uid").setValue(Uid);
-            oldPost.child("name").setValue(Name);
-            oldPost.child("email").setValue(Email);
-            oldPost.child("anonymous").setValue("false");
-            oldPost.child("category").setValue(category_from_spinner);
-            oldPost.child("time").setValue(ServerValue.TIMESTAMP);
+
 
             if(resultUri!=null) {
 
@@ -310,36 +314,56 @@ public class AddPost extends AppCompatActivity {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
-                        Toast.makeText(AddPost.this, "upload done", Toast.LENGTH_LONG).show();
+                        oldPost.child("title").setValue(titleString);
+                        oldPost.child("content").setValue(contentString);
+                        oldPost.child("uid").setValue(Uid);
+                        oldPost.child("name").setValue(Name);
+                        oldPost.child("email").setValue(Email);
+                        oldPost.child("anonymous").setValue("false");
+                        oldPost.child("category").setValue(category_from_spinner);
+                        oldPost.child("time").setValue(ServerValue.TIMESTAMP);
                         imageUrl = taskSnapshot.getDownloadUrl();
                         oldPost.child("ImageUrl").setValue(imageUrl.toString());
                         mProgress_save_to_database.dismiss();
 
+                        Toast.makeText(AddPost.this, "post updated", Toast.LENGTH_LONG).show();
                         finish();
                     }
                 });
             }else{
+                oldPost.child("title").setValue(titleString);
+                oldPost.child("content").setValue(contentString);
+                oldPost.child("uid").setValue(Uid);
+                oldPost.child("name").setValue(Name);
+                oldPost.child("email").setValue(Email);
+                oldPost.child("anonymous").setValue("false");
+                oldPost.child("category").setValue(category_from_spinner);
+                oldPost.child("time").setValue(ServerValue.TIMESTAMP);
                 oldPost.child("ImageUrl").setValue(image);
+                mProgress_save_to_database.dismiss();
+                Toast.makeText(AddPost.this, "post updated", Toast.LENGTH_LONG).show();
                 finish();
             }
 
         }else{
-            newPost.child("title").setValue(titleString);
-            newPost.child("content").setValue(contentString);
-            newPost.child("uid").setValue(Uid);
-            newPost.child("name").setValue(Name);
-            newPost.child("email").setValue(Email);
-            newPost.child("anonymous").setValue("false");
-            newPost.child("category").setValue(category_from_spinner);
-            newPost.child("time").setValue(ServerValue.TIMESTAMP);
+
             mStorage.putFile(resultUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
-                    Toast.makeText(AddPost.this,"upload done",Toast.LENGTH_LONG).show();
+
+                    newPost.child("title").setValue(titleString);
+                    newPost.child("content").setValue(contentString);
+                    newPost.child("uid").setValue(Uid);
+                    newPost.child("name").setValue(Name);
+                    newPost.child("email").setValue(Email);
+                    newPost.child("anonymous").setValue("false");
+                    newPost.child("category").setValue(category_from_spinner);
+                    newPost.child("time").setValue(ServerValue.TIMESTAMP);
                     imageUrl = taskSnapshot.getDownloadUrl();
                     newPost.child("ImageUrl").setValue(imageUrl.toString());
                     mProgress_save_to_database.dismiss();
+                    Toast.makeText(AddPost.this,"upload done",Toast.LENGTH_LONG).show();
 
                     finish();
                 }

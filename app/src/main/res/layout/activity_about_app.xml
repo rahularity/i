@@ -5,15 +5,144 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#000000"
+    android:padding="20dp"
     tools:context="com.ithought.rahul.ithought.AboutApp">
 
-    <Button
-        android:id="@+id/shareIdeas"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/button_background"
-        android:text="Share your thoughts to improve this app"
-        android:padding="10dp"
-        android:layout_centerInParent="true"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/ithought"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="26sp"
+                android:textColor="#ffffff"
+                android:fontFamily="sans-serif-condensed-light"
+                android:textStyle="bold"
+                android:layout_gravity="center_horizontal"
+                android:text="i Thought"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="#ffffff"
+                android:fontFamily="sans-serif-condensed"
+                android:textStyle="bold"
+                android:layout_gravity="center_horizontal"
+                android:text="Like, read, feel and share your thoughts"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@color/grayShade4"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                android:textColor="@color/grayShade3"
+                android:fontFamily="sans-serif-condensed"
+                android:textStyle="bold"
+                android:layout_centerHorizontal="true"
+                android:text="@string/shareYourThought"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textSize="18sp"
+                    android:textColor="@color/grayShade3"
+                    android:fontFamily="sans-serif-condensed"
+                    android:textStyle="bold"
+                    android:text="If you are in doubt, "/>
+
+                <TextView
+                    android:id="@+id/wearPink"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textSize="19sp"
+                    android:textColor="#ff69b4"
+                    android:fontFamily="sans-serif-condensed"
+                    android:textStyle="bold"
+                    android:text="WEAR PINK,"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/qwe"
+                android:layout_below="@+id/doubt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                android:textColor="@color/grayShade3"
+                android:fontFamily="sans-serif-condensed"
+                android:textStyle="bold"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/doubt"/>
+
+
+            <Button
+                android:id="@+id/shareIdeas"
+                android:layout_below="@+id/qwe"
+                android:layout_marginTop="25dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_background"
+                android:text="Click here for any query"
+                android:padding="7dp"
+                android:layout_gravity="center_horizontal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                android:textColor="@color/grayShade3"
+                android:fontFamily="sans-serif-condensed"
+                android:textStyle="bold"
+                android:text="@string/anonymousTalk"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                android:textColor="@color/grayShade3"
+                android:fontFamily="sans-serif-condensed"
+                android:textStyle="bold"
+                android:text="@string/instaShare"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+
+
+
+
+
+
 
 </RelativeLayout>

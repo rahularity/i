@@ -89,6 +89,8 @@ public class AboutMe extends AppCompatActivity {
             }
         });
 
+        userDatabase.keepSynced(true);
+
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

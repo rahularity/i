@@ -16,7 +16,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class FragmentNavigationDrawer extends Fragment {
 
-    TextView social,fashion,thoughts,food,lifestyle,experiences,all,nature;
+    TextView social,fashion,thoughts,food,lifestyle,experiences,all,nature,technology;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,6 +40,7 @@ public class FragmentNavigationDrawer extends Fragment {
         thoughts = (TextView)view.findViewById(R.id.thoughts);
         lifestyle = (TextView)view.findViewById(R.id.lifeStyle);
         experiences = (TextView)view.findViewById(R.id.experiences);
+        technology = (TextView)view.findViewById(R.id.technology);
 
 
 
@@ -60,6 +61,17 @@ public class FragmentNavigationDrawer extends Fragment {
             public void onClick(View v) {
 
                 ((MainActivity)getActivity()).postsNode = FirebaseDatabase.getInstance().getReference().child("posts").orderByChild("category").equalTo("Nature");
+                ((MainActivity)getActivity()).setTheScreen();
+                ((MainActivity)getActivity()).mDrawerLayout.closeDrawer(Gravity.LEFT);
+
+            }
+        });
+
+        technology.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                ((MainActivity)getActivity()).postsNode = FirebaseDatabase.getInstance().getReference().child("posts").orderByChild("category").equalTo("Technology");
                 ((MainActivity)getActivity()).setTheScreen();
                 ((MainActivity)getActivity()).mDrawerLayout.closeDrawer(Gravity.LEFT);
 

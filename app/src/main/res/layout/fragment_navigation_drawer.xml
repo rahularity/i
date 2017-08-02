@@ -34,18 +34,24 @@
                 style="@style/NavigationStyle"/>
 
             <TextView
+                android:id="@+id/thoughts"
+                android:text="Thoughts"
+                style="@style/NavigationStyle"/>
+
+            <TextView
+                android:id="@+id/technology"
+                android:text="Technology"
+                style="@style/NavigationStyle"/>
+
+            <TextView
                 android:id="@+id/social"
                 android:text="Social"
                 style="@style/NavigationStyle"/>
 
+
             <TextView
                 android:id="@+id/fashion"
                 android:text="Fashion"
-                style="@style/NavigationStyle"/>
-
-            <TextView
-                android:id="@+id/thoughts"
-                android:text="Thoughts"
                 style="@style/NavigationStyle"/>
 
             <TextView

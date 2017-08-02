@@ -178,15 +178,15 @@ public class LoginActivity extends AppCompatActivity {
                     DatabaseReference usr = FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid());
                     usr.child("userName").setValue(user.getDisplayName());
                     usr.child("userEmail").setValue(user.getEmail());
-                    if (user.getPhotoUrl() != null){
-                        usr.child("profilePic").setValue(user.getPhotoUrl().toString());
-                        StorageReference mStorage = FirebaseStorage.getInstance().getReference().child("profile_pics").child(randomize());
-                    }else{
-                        usr.child("profilePic").setValue("");
-                    }
                     usr.child("website").setValue("");
                     usr.child("about").setValue("");
                     usr.child("instagram").setValue("");
+                    if (user.getPhotoUrl() != null){
+                        usr.child("profilePic").setValue(user.getPhotoUrl().toString());
+                    }else{
+                        usr.child("profilePic").setValue("");
+                    }
+
                 }
             }
 

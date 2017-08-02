@@ -13,6 +13,20 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
 
+    <TextView
+        android:id="@+id/empty_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:layout_centerInParent="true"
+        android:fontFamily="sans-serif-condensed"
+        android:textSize="18sp"
+        android:textStyle="italic|bold"
+        android:visibility="invisible"
+        android:text="Ohh no...\nIt's a bit lonely here\nCome On! Be the first to share something with us."/>
+
 
 
     <android.support.v4.widget.DrawerLayout
@@ -34,16 +48,15 @@
                 android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
-            <android.support.v7.widget.RecyclerView android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/posts_list"
-                xmlns:android="http://schemas.android.com/apk/res/android">
-            </android.support.v7.widget.RecyclerView>
+
+                <android.support.v7.widget.RecyclerView android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/posts_list"
+                    xmlns:android="http://schemas.android.com/apk/res/android">
+                </android.support.v7.widget.RecyclerView>
+
 
         </LinearLayout>
-
-
-
 
         <fragment
             android:id="@+id/fragment_navigation_drawer"
@@ -53,6 +66,8 @@
             android:layout_gravity="start"
             app:layout="@layout/fragment_navigation_drawer"
             tools:layout="@layout/fragment_navigation_drawer" />
+
+
 
 
     </android.support.v4.widget.DrawerLayout>

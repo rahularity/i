@@ -44,16 +44,15 @@ public class PostDisplayPageActivity extends AppCompatActivity {
     private TextView title,content,loveCount,writerName;
     private ImageButton edit,delete,love;
     private ImageView postImage;
-    private DatabaseReference mPostRef,mLoveRef,mRef,userRef;
+    private DatabaseReference mPostRef,mLoveRef,userRef;
     private StorageReference mPicReference;
-    private FirebaseStorage mFirebaseStorage;
     private FirebaseAuth mAuth;
     private FirebaseUser currentUser;
     private String key = null,Uid,photoUrl,authorUid,profPic,isAnonymous;
     private boolean mLoved = false;
     private ImageButton authorDetails;
     private Dialog dialog,dialogAnonymous,dialogDelete;
-    private Context ctx;
+    private ProgressDialog deleteInProgress;
 
 
     @Override
@@ -65,6 +64,7 @@ public class PostDisplayPageActivity extends AppCompatActivity {
 
 
 
+        deleteInProgress = new ProgressDialog(this);
         dialogDelete = new Dialog(this);
         dialogDelete.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialogDelete.setContentView(R.layout.delete_dialog_layout);
@@ -93,35 +93,44 @@ public class PostDisplayPageActivity extends AppCompatActivity {
             Uid = currentUser.getUid();
         }
 
-
-        mFirebaseStorage = FirebaseStorage.getInstance();
         mLoveRef = FirebaseDatabase.getInstance().getReference().child("loves");
         mPostRef = FirebaseDatabase.getInstance().getReference().child("posts").child(key);
-        mRef = FirebaseDatabase.getInstance().getReference().child("posts");
         userRef = FirebaseDatabase.getInstance().getReference().child("users");
 
         mPostRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                authorUid = dataSnapshot.child("uid").getValue(String.class);
-                isAnonymous = dataSnapshot.child("anonymous").getValue(String.class);
 
-                if(isAnonymous.equals("true")){
-                    String name = "by someone Anonymous";
-                    writerName.setText(name);
-                }else{
-                    //setting writer name on the post display page
-                    DatabaseReference theWriter = userRef.child(authorUid);
-                    theWriter.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            String name = "by "+ dataSnapshot.child("userName").getValue(String.class);
-                            writerName.setText(name);
-                        }
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {}
-                    });
+                if(dataSnapshot.exists()){
+
+                    String uid = dataSnapshot.child("uid").getValue(String.class);
+                    if (uid!=null && uid.equals(Uid)) {
+                        photoUrl = dataSnapshot.child("ImageUrl").getValue(String.class);
+                        delete.setVisibility(View.VISIBLE);
+                        edit.setVisibility(View.VISIBLE);
+                    }
+
+                    authorUid = dataSnapshot.child("uid").getValue(String.class);
+                    isAnonymous = dataSnapshot.child("anonymous").getValue(String.class);
+
+                    if(isAnonymous.equals("true")){
+                        String name = "by someone Anonymous";
+                        writerName.setText(name);
+                    }else{
+                        //setting writer name on the post display page
+                        DatabaseReference theWriter = userRef.child(authorUid);
+                        theWriter.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                String name = "by "+ dataSnapshot.child("userName").getValue(String.class);
+                                writerName.setText(name);
+                            }
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {}
+                        });
+                    }
                 }
+
             }
 
             @Override
@@ -129,21 +138,6 @@ public class PostDisplayPageActivity extends AppCompatActivity {
 
             }
         });
-
-        mRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                String uid = dataSnapshot.child(key).child("uid").getValue(String.class);
-                if (uid != null && uid.equals(Uid)) {
-                    photoUrl = dataSnapshot.child(key).child("ImageUrl").getValue(String.class);
-                    delete.setVisibility(View.VISIBLE);
-                    edit.setVisibility(View.VISIBLE);
-                }
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {}
-        });
-
 
         love.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -165,18 +159,27 @@ public class PostDisplayPageActivity extends AppCompatActivity {
                 delete.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        mPostRef.removeValue();
-                        mLoveRef.child(key).removeValue();
-                        mPicReference = mFirebaseStorage.getReferenceFromUrl(photoUrl);
+
+                        deleteInProgress.setMessage("deleting your post");
+                        deleteInProgress.show();
+                        mPicReference = FirebaseStorage.getInstance().getReferenceFromUrl(photoUrl);
                         mPicReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
-                                Toast.makeText(PostDisplayPageActivity.this,"deleted successfully",Toast.LENGTH_SHORT).show();
+                                mPostRef.removeValue();
+                                mLoveRef.child(key).child("randomId").removeValue();
+                                mLoveRef.child(key).removeValue();
+                                Toast.makeText(PostDisplayPageActivity.this,"your post is deleted successfully",Toast.LENGTH_SHORT).show();
+                                deleteInProgress.dismiss();
+                                finish();
+                                Intent mainActivity = new Intent(PostDisplayPageActivity.this,MainActivity.class);
+                                startActivity(mainActivity);
                             }
                         });
-                        finish();
-                        Intent mainActivity = new Intent(PostDisplayPageActivity.this,MainActivity.class);
-                        startActivity(mainActivity);
+
+
+
+
                     }
                 });
 

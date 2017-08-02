@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener mAuthListener;
     public Query postsNode,likedPosts;
     ProgressDialog dialog;
+    TextView emptyView;
     private LinearLayoutManager mLayoutManager;
     private static final String BUNDLE_RECYCLER_LAYOUT = "classname.recycler.layout";
 
@@ -64,12 +65,11 @@ public class MainActivity extends AppCompatActivity {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
 
+        emptyView = (TextView)findViewById(R.id.empty_view);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-
-        Toast.makeText(MainActivity.this,"onCreate",Toast.LENGTH_SHORT).show();
 
         mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer);
         mDrawableListItem = getResources().getStringArray(R.array.drawer_list);
@@ -99,9 +99,6 @@ public class MainActivity extends AppCompatActivity {
                 mDrawerToggle.syncState();
             }
         });
-
-
-
 
 
         dialog=new ProgressDialog(this);
@@ -163,6 +160,8 @@ public class MainActivity extends AppCompatActivity {
 
         setTheScreen();
 
+
+
     }
 
     @Override
@@ -222,6 +221,7 @@ public class MainActivity extends AppCompatActivity {
 
             case R.id.myPosts:
                 postsNode = FirebaseDatabase.getInstance().getReference().child("posts").orderByChild("uid").equalTo(Uid);
+                postsNode.keepSynced(true);
                 setTheScreen();
                 Toast.makeText(MainActivity.this,"you selected your posts",Toast.LENGTH_SHORT).show();
                 break;
@@ -356,7 +356,24 @@ public class MainActivity extends AppCompatActivity {
            }
        };
        mPostsList.setAdapter(firebaseRecyclerAdapter);
+
+        postsNode.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(!dataSnapshot.exists()){
+                    emptyView.setVisibility(View.VISIBLE);
+                }else{
+                    emptyView.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
         firebaseRecyclerAdapter.notifyDataSetChanged();
+
    }
 
     public static class PostViewHolder extends RecyclerView.ViewHolder{

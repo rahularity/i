@@ -46,4 +46,11 @@ At his dicit scribentur, sit utroque volutpat ei. His an malis epicuri fastidii,
     <string name="slide_3_desc2">-your posts\n-your liked posts\n-your personal details\n-your promotional details</string>
     <string name="slide_3_desc">Mange your account</string>
 
+    <string name="slide_4_title">Get Popular</string>
+    <string name="slide_4_desc">Add your instagram account and people will follow you when you post.</string>
+    <string name="slide_4_desc2">(only if they liked your post ofcourse or maybe if they like your dp ;)</string>
+    <string name="shareYourThought">Share your thoughts on how to improve this application, all suggessions are appreciated.</string>
+    <string name="doubt">about the development feel free to ask your queries.</string>
+    <string name="anonymousTalk">Yes, you can post Anonymously but please...please make sure not to post the monster in you, believe me nobody wants to see your monster ;)</string>
+    <string name="instaShare">Do share your Instagram Account, so that more and more people can reach to you and follow your work.</string>
 </resources>

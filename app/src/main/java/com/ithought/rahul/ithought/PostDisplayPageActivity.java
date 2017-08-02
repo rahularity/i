@@ -166,9 +166,8 @@ public class PostDisplayPageActivity extends AppCompatActivity {
                         mPicReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
-                                mPostRef.removeValue();
-                                mLoveRef.child(key).child("randomId").removeValue();
                                 mLoveRef.child(key).removeValue();
+                                mPostRef.removeValue();
                                 Toast.makeText(PostDisplayPageActivity.this,"your post is deleted successfully",Toast.LENGTH_SHORT).show();
                                 deleteInProgress.dismiss();
                                 finish();
@@ -366,7 +365,6 @@ public class PostDisplayPageActivity extends AppCompatActivity {
                                 mLoveRef.child(key).child("name").setValue(dataSnapshot.child("name").getValue(String.class));
                                 mLoveRef.child(key).child("email").setValue(dataSnapshot.child("email").getValue(String.class));
                                 mLoveRef.child(key).child("category").setValue(dataSnapshot.child("category").getValue(String.class));
-                                mLoveRef.child(key).child("randomId").setValue(randomize());
                             }
 
                             @Override
@@ -432,18 +430,6 @@ public class PostDisplayPageActivity extends AppCompatActivity {
             @Override
             public void onCancelled(DatabaseError databaseError) {}
         });
-    }
-
-    public static String randomize() {
-        Random generator = new Random();
-        StringBuilder randomStringBuilder = new StringBuilder();
-        int randomLength = generator.nextInt(MAX_LENGTH);
-        char tempChar;
-        for (int i = 0; i < randomLength; i++){
-            tempChar = (char) (generator.nextInt(96) + 32);
-            randomStringBuilder.append(tempChar);
-        }
-        return randomStringBuilder.toString();
     }
 
     @Override

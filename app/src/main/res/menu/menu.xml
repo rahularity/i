@@ -8,14 +8,6 @@
     </item>
 
     <item
-        android:title="random"
-        android:id="@+id/random"
-        android:icon="@drawable/shuffle"
-        app:showAsAction="always">
-
-    </item>
-
-    <item
         android:id="@+id/myPosts"
         android:title="My Posts">
     </item>

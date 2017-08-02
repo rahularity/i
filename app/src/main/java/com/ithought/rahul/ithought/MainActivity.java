@@ -196,13 +196,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this,AboutMe.class));
                 break;
 
-            case R.id.random:
-                postsNode = FirebaseDatabase.getInstance().getReference().child("loves").orderByChild("randomId");
-                setTheScreen();
-                Toast.makeText(MainActivity.this,"Posts are randomly sorted",Toast.LENGTH_SHORT).show();
-                break;
-
-
             case android.R.id.home:
                 if(mDrawerLayout.isDrawerOpen(GravityCompat.START)){
                     mDrawerLayout.closeDrawer(Gravity.LEFT);
@@ -320,7 +313,6 @@ public class MainActivity extends AppCompatActivity {
                                                mLoveNode.child(key).child("uid").setValue(dataSnapshot.child("uid").getValue(String.class));
                                                mLoveNode.child(key).child("name").setValue(dataSnapshot.child("name").getValue(String.class));
                                                mLoveNode.child(key).child("email").setValue(dataSnapshot.child("email").getValue(String.class));
-                                               mLoveNode.child(key).child("randomId").setValue(randomize());
                                                mLoveNode.child(key).child("category").setValue(dataSnapshot.child("category").getValue(String.class));
                                            }
                                            @Override
@@ -436,19 +428,6 @@ public class MainActivity extends AppCompatActivity {
             Picasso.with(ctx).load(imageUrl).fit().centerCrop().into(post_image);
         }
 
-    }
-
-
-    public static String randomize() {
-        Random generator = new Random();
-        StringBuilder randomStringBuilder = new StringBuilder();
-        int randomLength = generator.nextInt(MAX_LENGTH);
-        char tempChar;
-        for (int i = 0; i < randomLength; i++){
-            tempChar = (char) (generator.nextInt(96) + 32);
-            randomStringBuilder.append(tempChar);
-        }
-        return randomStringBuilder.toString();
     }
 
     @Override

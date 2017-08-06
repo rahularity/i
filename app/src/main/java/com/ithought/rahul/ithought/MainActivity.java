@@ -446,4 +446,10 @@ public class MainActivity extends AppCompatActivity {
             mPostsList.getLayoutManager().onRestoreInstanceState(savedRecyclerLayoutState);
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 }

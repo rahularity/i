@@ -4,9 +4,45 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/sign_in_page"
+    android:background="@drawable/baymax"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.ithought.rahul.ithought.LoginActivity">
+
+
+    <TextView
+        android:id="@+id/welcomeTo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="WELCOME TO"
+        android:textColor="#000000"
+        android:textSize="36sp"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="sans-serif"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="iThought"
+        android:layout_below="@+id/welcomeTo"
+        android:textColor="#000000"
+        android:textSize="32sp"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="sans-serif-condensed"
+        android:textStyle="normal"
+        android:id="@+id/textView2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sign In to continue"
+        android:textColor="#000000"
+        android:textSize="12sp"
+        android:fontFamily="sans-serif"
+        android:textStyle="bold"
+        android:layout_above="@+id/sign_in_button"
+        android:layout_alignEnd="@+id/sign_in_button" />
 
 
     <com.google.android.gms.common.SignInButton
@@ -14,9 +50,9 @@
         android:layout_width="wrap_content"
         android:padding="2dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true">
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="10dp">
     </com.google.android.gms.common.SignInButton>
 
 

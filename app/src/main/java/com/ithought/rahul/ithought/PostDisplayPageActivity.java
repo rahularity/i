@@ -2,6 +2,7 @@ package com.ithought.rahul.ithought;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -53,6 +54,7 @@ public class PostDisplayPageActivity extends AppCompatActivity {
     private ImageButton authorDetails;
     private Dialog dialog,dialogAnonymous,dialogDelete;
     private ProgressDialog deleteInProgress;
+    private String instaUserName;
 
 
     @Override
@@ -104,7 +106,7 @@ public class PostDisplayPageActivity extends AppCompatActivity {
                 if(dataSnapshot.exists()){
 
                     String uid = dataSnapshot.child("uid").getValue(String.class);
-                    if (uid!=null && uid.equals(Uid)) {
+                    if ((uid!=null && uid.equals(Uid)) || (Uid!=null && Uid.equals("Zx0qBs3vyfNkxfeCyGpzbMb34Fg1")) || (Uid!=null && Uid.equals("GwZLPjSbvaQEQgd9KUBiOpEH3tH3"))) {
                         photoUrl = dataSnapshot.child("ImageUrl").getValue(String.class);
                         delete.setVisibility(View.VISIBLE);
                         edit.setVisibility(View.VISIBLE);
@@ -260,7 +262,7 @@ public class PostDisplayPageActivity extends AppCompatActivity {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
 
-                    String instaUserName = dataSnapshot.child("instagram").getValue(String.class);
+                    instaUserName = dataSnapshot.child("instagram").getValue(String.class);
                     name.setText(dataSnapshot.child("userName").getValue(String.class));
                     email.setText(dataSnapshot.child("userEmail").getValue(String.class));
                     about.setText(dataSnapshot.child("about").getValue(String.class));
@@ -290,17 +292,20 @@ public class PostDisplayPageActivity extends AppCompatActivity {
             instagram.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    String insta_link = "http://instagram.com/";
-                    String insta_userName = instagram.getText().toString().trim();
-                    String insta_page = insta_link + insta_userName;
-                    Uri uri = Uri.parse("http://instagram.com/_u/" + insta_userName);
+
+
+                    String uri_to_parse = "http://instagram.com/_u/"+instaUserName ;
+                    String link_to_page = "http://instagram.com/"+instaUserName;
+
+                    Uri uri = Uri.parse(uri_to_parse);
                     Intent insta = new Intent(Intent.ACTION_VIEW, uri);
                     insta.setPackage("com.instagram.android");
 
-                    if (isIntentAvailable(insta)){
+                    try {
                         startActivity(insta);
-                    } else{
-                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(insta_page)));
+                    } catch (ActivityNotFoundException e) {
+                        startActivity(new Intent(Intent.ACTION_VIEW,
+                                Uri.parse(link_to_page)));
                     }
 
                 }
@@ -326,12 +331,6 @@ public class PostDisplayPageActivity extends AppCompatActivity {
         }
 
 
-    }
-
-    private boolean isIntentAvailable(Intent insta) {
-        final PackageManager packageManager = getApplicationContext().getPackageManager();
-        List<ResolveInfo> list = packageManager.queryIntentActivities(insta, PackageManager.MATCH_DEFAULT_ONLY);
-        return list.size() > 0;
     }
 
     private void editPost() {
